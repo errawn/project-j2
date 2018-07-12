@@ -6,12 +6,11 @@
  * @flow
  */
 
-import React, {Component} from 'react';
-import { ApolloProvider } from 'react-apollo';
+import React, {Component} from 'react'
+import { ApolloProvider } from 'react-apollo'
 
-import client from '../client';
+import client from '../client'
 import Centers from './Centers'
-
 
 export default class App extends Component<Props> {
   render() {
