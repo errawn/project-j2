@@ -22,11 +22,5 @@
   },
   "jest": {
     "preset": "react-native"
-  },
-  "proxy": {
-    "/graphql": {
-      "target": "http://locahost:3000",
-      "changeOrigin": true
-    }
   }
 }
