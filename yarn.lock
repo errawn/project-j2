@@ -4252,6 +4252,10 @@ react-is@^16.4.1:
   version "16.4.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.4.1.tgz#d624c4650d2c65dbd52c72622bbf389435d9776e"
 
+react-native-loading-spinner-overlay@^0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/react-native-loading-spinner-overlay/-/react-native-loading-spinner-overlay-0.5.2.tgz#b7bcd277476d596615fd7feee601789f9bdc7acc"
+
 react-native@0.56.0:
   version "0.56.0"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.56.0.tgz#66686f781ec39a44376aadd4bbc55c8573ab61e5"
