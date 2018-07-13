@@ -3,13 +3,15 @@
 buildscript {
     repositories {
         jcenter()
+        google() // Added based from https://itnext.io/install-react-native-maps-with-gradle-3-on-android-44f91a70a395
         maven {
             url 'https://maven.google.com/'
             name 'Google'
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+       // classpath 'com.android.tools.build:gradle:2.3.3'
+       classpath 'com.android.tools.build:gradle:3.1.0'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -20,6 +22,7 @@ allprojects {
     repositories {
         mavenLocal()
         jcenter()
+        google() // Added based from https://itnext.io/install-react-native-maps-with-gradle-3-on-android-44f91a70a395
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
             url "$rootDir/../node_modules/react-native/android"
@@ -32,7 +35,7 @@ allprojects {
 }
 
 ext {
-    buildToolsVersion = "26.0.3"
+    buildToolsVersion = "27.0.3"
     minSdkVersion = 16
     compileSdkVersion = 26
     targetSdkVersion = 26
