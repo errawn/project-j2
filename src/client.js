@@ -1,7 +1,7 @@
 import ApolloClient from 'apollo-boost'
-
+import { API_ENDPOINT } from './config/keys'
 const client = new ApolloClient({
-  uri: 'http://318b0850.ngrok.io/graphql'
+  uri: API_ENDPOINT
 });
 
 export default client
