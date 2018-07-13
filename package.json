@@ -13,6 +13,7 @@
     "react": "16.4.1",
     "react-apollo": "^2.1.9",
     "react-native": "0.56.0",
+    "react-native-google-places": "^2.5.2",
     "react-native-loading-spinner-overlay": "^0.5.2",
     "react-native-maps": "^0.21.0"
   },
