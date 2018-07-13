@@ -19,8 +19,7 @@ const defaultState = {
   currentLocation: {
     __typename: 'CurrentLocation',
     latitude: '',
-    longitude: '',
-    name: 'Edgardo'
+    longitude: ''
   }
 }
 
@@ -32,11 +31,10 @@ const stateLink = withClientState({
   resolvers: {
     Mutation: {
       // updateName mutation
-      updateName: (_, { name }, { cache }) => {
+      updateCurrentLocation: (_, { latitude, longitude }, { cache }) => {
         const query = gql `
           query {
               currentLocation @client {
-                  name,
                   latitude,
                   longitude
               }
@@ -49,13 +47,14 @@ const stateLink = withClientState({
           ...previousState,
           currentLocation: {
             ...previousState.currentLocation,
-            name
+            latitude,
+            longitude
           }
         }
-        
         // update cache for ui to auto render!
         cache.writeData({ query, data })
-        return null //ger rid of the warning missing field
+        //get rid of the warning missing field
+        return null
       }
     }
   }

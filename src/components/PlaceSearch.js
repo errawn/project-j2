@@ -4,17 +4,22 @@ import RNGooglePlaces from 'react-native-google-places'
 
 import { graphql, compose } from 'react-apollo'
 import GET_CURRENT_LOCATION from '../queries/curent_location_query'
-import UPDATE_NAME from '../mutations/update_name_mutation'
+import UPDATE_CURRENT_LOCATION from '../mutations/update_current_location_mutation'
 
 class PlaceSearch extends Component {
     openSearchModal() {
-        const { updateName } = this.props
+        const { updateCurrentLocation } = this.props
         RNGooglePlaces.openAutocompleteModal({
             country: 'PH'
         })
-        .then((place) => {
-            updateName({ variables: { name: 'Warren!' } })
-            console.log(place);
+        .then(({ longitude, latitude }) => {
+            console.log(longitude, latitude);
+            updateCurrentLocation({ 
+                variables: { 
+                    longitude,
+                    latitude
+                } 
+            })
             // place represents user's selection from the
             // suggestions and it is a simplified Google Place object.
         })
@@ -22,16 +27,15 @@ class PlaceSearch extends Component {
     }
 
     render() {
-        const { 
-            currentLocation
-        } = this.props
+        const { currentLocation: { longitude, latitude } } = this.props
         return (
         <View style={styles.container}>
             <TouchableOpacity
                 style={styles.button}
                 onPress={() => this.openSearchModal()}
             >
-            <Text>Not my location {currentLocation.name}</Text>
+            <Text>Lat: {latitude}</Text>
+            <Text>Long: {longitude}</Text>
             </TouchableOpacity>
         </View>
         );
@@ -47,7 +51,7 @@ const styles = {
     },
     button: {
         width: 100,
-        height: 50,
+        height: 100,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'red',
@@ -55,7 +59,7 @@ const styles = {
 }
 
 export default compose(
-    graphql(UPDATE_NAME, { name: 'updateName' }),
+    graphql(UPDATE_CURRENT_LOCATION, { name: 'updateCurrentLocation' }),
     graphql(GET_CURRENT_LOCATION, {
         props: ({ data: { currentLocation } }) => ({
             currentLocation
