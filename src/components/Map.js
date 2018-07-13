@@ -2,33 +2,46 @@ import React, { Component } from 'react'
 import MapView, { Marker } from 'react-native-maps';
 import { View, StyleSheet, Text } from 'react-native'
 import Spinner from 'react-native-loading-spinner-overlay'
+
+import { graphql, compose } from 'react-apollo'
+import GET_CURRENT_LOCATION from '../queries/curent_location_query'
+import UPDATE_CURRENT_LOCATION from '../mutations/update_current_location_mutation'
+
 import PlaceSearch from './PlaceSearch'
   
 class Map extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { longitude: '', latitude: '' }
-  }
+  state = { isVisible: false }
 
   componentDidMount() {
+    // close overlay spinner
+    this.setState({ isVisible: false })
+    // get user's current location and update local State
     navigator.geolocation.getCurrentPosition(
       (position) => {
           let currentUserPosition = position.coords
           const { longitude, latitude } = currentUserPosition
-          this.setState({ longitude, latitude  })
+          const { updateCurrentLocation } = this.props
+          updateCurrentLocation({ 
+              variables: { 
+                  longitude,
+                  latitude
+              } 
+          })
       },
       (error) => {
           console.log(error)
       }
-  )
+    )
   }
 
   render() {
-    const { longitude, latitude } = this.state
+    const { currentLocation: { longitude, latitude } } = this.props
+    const { isVisible } = this.state
 
     if (!longitude || !latitude) {
-      return <Spinner visible={true} textContent={"Accessing your location..."} textStyle={{color: '#fff'}} />
+      return <Spinner visible={isVisible} textContent={"Accessing your location..."} textStyle={{color: '#fff'}} />
     }
+
     return (
       <View style ={styles.container}>
         <MapView
@@ -75,4 +88,11 @@ const styles = StyleSheet.create({
 });
 
 
-export default Map
+export default compose(
+  graphql(UPDATE_CURRENT_LOCATION, { name: 'updateCurrentLocation' }),
+  graphql(GET_CURRENT_LOCATION, {
+    props: ({ data: { currentLocation } }) => ({
+      currentLocation
+    })
+  })
+)(Map)

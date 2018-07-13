@@ -18,8 +18,8 @@ const cache = new InMemoryCache({
 const defaultState = {
   currentLocation: {
     __typename: 'CurrentLocation',
-    latitude: '',
-    longitude: ''
+    latitude: 37.78825,
+    longitude: -122.4324
   }
 }
 
