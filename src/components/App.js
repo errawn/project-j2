@@ -8,15 +8,19 @@
 
 import React, {Component} from 'react'
 import { ApolloProvider } from 'react-apollo'
+import { View, Text } from 'react-native'
 
 import client from '../client'
 import Centers from './Centers'
+import Map from './Map'
 
-export default class App extends Component<Props> {
+export default class App extends Component {
   render() {
     return (
       <ApolloProvider client={client}>
-        <Centers />
+        <View>
+          <Text>Hello!</Text>
+        </View>
       </ApolloProvider>
     );
   }
