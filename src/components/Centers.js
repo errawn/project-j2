@@ -15,7 +15,7 @@ class Centers extends Component {
       			{({ loading, error, data }) => {
       				if (loading) { return <Spinner visible={this.state.visible} textContent={"Getting nearest centers..."} textStyle={{color: '#fff'}} /> }
       				if (error) { return <Text>{error.message}</Text> }
-      				return (
+					return (
       					<View>
 							{ data.centers.map(center => <Text key={center.id}>{center.name}</Text>) }	      						
       					</View>
