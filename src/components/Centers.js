@@ -17,7 +17,15 @@ class Centers extends Component {
       				if (error) { return <Text>{error.message}</Text> }
 					return (
       					<View>
-							{ data.centers.map(center => <Text key={center.id}>{center.name}</Text>) }	      						
+							{ data.centers.map(center => {
+								return (
+									<View key={center.id}>
+										<Text>Name: {center.name}</Text>
+										<Text>Lat: {center.lat}</Text>
+										<Text>Long: {center.long}</Text>
+									</View>
+								)
+							}) }	      						
       					</View>
       				)
       			}}
