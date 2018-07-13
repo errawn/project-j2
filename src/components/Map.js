@@ -1,29 +1,10 @@
 import React, { Component } from 'react'
 import MapView, { Marker } from 'react-native-maps';
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Text } from 'react-native'
 import Spinner from 'react-native-loading-spinner-overlay'
-
-const styles = StyleSheet.create({
-  container: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  map: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-});
+import PlaceSearch from './PlaceSearch'
   
 class Map extends Component {
-
   constructor(props) {
     super(props)
     this.state = { longitude: '', latitude: '' }
@@ -68,9 +49,30 @@ class Map extends Component {
           />
         ))}
         </MapView>
+        <PlaceSearch />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  map: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+});
+
 
 export default Map
