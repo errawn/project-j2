@@ -1,3 +1,3 @@
 module.exports = {
-    API_ENDPOINT: 'https://463786c3.ngrok.io/graphql'
+    API_ENDPOINT: 'http://04c36248.ngrok.io/graphql'
 }
