@@ -4,13 +4,16 @@ import RNGooglePlaces from 'react-native-google-places'
 
 import { graphql, compose } from 'react-apollo'
 import GET_CURRENT_LOCATION from '../queries/curent_location_query'
+import UPDATE_NAME from '../mutations/update_name_mutation'
 
 class PlaceSearch extends Component {
     openSearchModal() {
+        const { updateName } = this.props
         RNGooglePlaces.openAutocompleteModal({
             country: 'PH'
         })
         .then((place) => {
+            updateName({ variables: { name: 'Warren!' } })
             console.log(place);
             // place represents user's selection from the
             // suggestions and it is a simplified Google Place object.
@@ -19,14 +22,16 @@ class PlaceSearch extends Component {
     }
 
     render() {
-        const { currentLocation: { name, longitude, latitude } } = this.props
+        const { 
+            currentLocation
+        } = this.props
         return (
         <View style={styles.container}>
             <TouchableOpacity
                 style={styles.button}
                 onPress={() => this.openSearchModal()}
             >
-            <Text>Not my location {name}</Text>
+            <Text>Not my location {currentLocation.name}</Text>
             </TouchableOpacity>
         </View>
         );
@@ -50,6 +55,7 @@ const styles = {
 }
 
 export default compose(
+    graphql(UPDATE_NAME, { name: 'updateName' }),
     graphql(GET_CURRENT_LOCATION, {
         props: ({ data: { currentLocation } }) => ({
             currentLocation
