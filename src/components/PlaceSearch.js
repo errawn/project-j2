@@ -34,8 +34,7 @@ class PlaceSearch extends Component {
                 style={styles.button}
                 onPress={() => this.openSearchModal()}
             >
-            <Text>Lat: {latitude}</Text>
-            <Text>Long: {longitude}</Text>
+                <Text>GPS Not Accurarate? Set where you are</Text>
             </TouchableOpacity>
         </View>
         );
